@@ -30,18 +30,35 @@ if (navigator.geolocation)
 
       const map = L.map('map').setView(coords, 13); // o segundo parametro, o numero 13 é o zoom
 
+      console.log(L);
       // o mapa vem de pequenos blocos e esses blocos veem dessa URL
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
+      // Evento de mapa especial, evento criado pelo Leaflet
+      map.on('click', mapEvent => {
+        console.log(mapEvent);
+        const { lat, lng } = mapEvent.latlng;
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('Workout')
+          .openPopup();
+      });
     },
     function () {
       alert('Could not get your position');
     }
   );
+
+// Displaying a Map Marker
