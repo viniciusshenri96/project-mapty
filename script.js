@@ -5,6 +5,7 @@ class Workout {
   // Nunca devemos usar ID por conta propria, podemos ultilizar alguma biblioteca que faça isso
   // Date.now() da o carimbo de hora atual
   id = Date.now() + ''.slice(-10);
+  clicks = 0;
   constructor(coords, distance, duration) {
     this.coords = coords; // [lat, lng]
     this.distance = distance; // in km
@@ -20,6 +21,10 @@ class Workout {
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
   }
 }
 
@@ -74,6 +79,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class App {
   // Propriedades de instância privada
   #map;
+  #mapZoomLevel = 13;
   #mapEvent;
   // propriedade para guardar o workout no array
   #workout = [];
@@ -88,6 +94,7 @@ class App {
 
     // O evento change é acionado para os elementos input , select e textarea quando o usuário modifica o valor do elemento. Ao contrário do evento de entrada, o evento de alteração não é necessariamente acionado para cada alteração no valor de um elemento.
     inputType.addEventListener('change', this._toggleElevantionField);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -110,7 +117,7 @@ class App {
     // Displaying a Map Using Leaflet Library
     // L é como um namespace, algum objeto, é uma variavel global dentro de Leaflet
 
-    this.#map = L.map('map').setView(coords, 13); // o segundo parametro, o numero 13 é o zoom
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel); // o segundo parametro, o numero 13 é o zoom
     // o mapa vem de pequenos blocos e esses blocos veem dessa URL
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
@@ -283,6 +290,26 @@ class App {
   `;
 
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+
+    if (!workoutEl) return;
+    console.log(workoutEl);
+    const workout = this.#workout.find(
+      work => work.id === workoutEl.dataset.id
+    );
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+    // using the public interface
+    workout.click();
   }
 }
 
