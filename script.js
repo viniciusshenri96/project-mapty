@@ -87,7 +87,11 @@ class App {
   // o construtor é executado assim que um novo objeto é criado a partir dessa classe
   constructor() {
     // o construtor vai acionar o _getPosition()
+    // Get user's position
     this._getPosition();
+
+    // Get data from local storage
+    this._getLocalStorage();
 
     // Rendering Workout Input Form
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -129,6 +133,10 @@ class App {
 
     // Handlich clicks on map
     this.#map.on('click', this._showForm.bind(this));
+
+    this.#workout.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(mapE) {
@@ -139,8 +147,6 @@ class App {
   }
 
   _hideForm() {
-    // Hide form + clear input fields
-
     // Empty inputs
     inputDistance.value =
       inputDuration.value =
@@ -215,7 +221,11 @@ class App {
     // Render workout on list
     this._renderWorkout(workout);
 
+    // Hide form + clear input fields
     this._hideForm();
+
+    // Set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -296,7 +306,6 @@ class App {
     const workoutEl = e.target.closest('.workout');
 
     if (!workoutEl) return;
-    console.log(workoutEl);
     const workout = this.#workout.find(
       work => work.id === workoutEl.dataset.id
     );
@@ -310,6 +319,33 @@ class App {
 
     // using the public interface
     workout.click();
+  }
+
+  _setLocalStorage() {
+    // o primeiro parametro é o nome da chave, e o segundo é um objeto que será convertido em string com JSON
+
+    localStorage.setItem('workouts', JSON.stringify(this.#workout));
+  }
+
+  _getLocalStorage() {
+    // convertendo string em objeto com JSON.parse()
+
+    // Mas quando convertemos nossos objetos em uma string e, em seguida, de volta da string para objetos, perdemos a cadeia de protipo, Esses objetos vindos do armazenamento local não herdarão todos os métodos que herdaram antes
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    if (!data) return;
+
+    this.#workout = data;
+
+    this.#workout.forEach(work => {
+      this._renderWorkout(work);
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    // É basicamente um grande objeto, que contém muitos metodos e propriedades do navegador. E um dos métodos é a capacidade de recarregar a página.
+    location.reload();
   }
 }
 
