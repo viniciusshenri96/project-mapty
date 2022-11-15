@@ -43,14 +43,15 @@ The user can add the workouts after selecting the workout location on the map. O
 
 ![](Mapty-flowchart.png)
 
-<h3><strong>OOP (Object-Oriented Programming)</strong> - In this project I used OOP to organize my code structure, with classes, objects, inheritance and methods according to architecture.
-</h3>
+<h3><strong>OOP (Object-Oriented Programming)</strong></h3> - In this project I used OOP to organize my code structure, with classes, objects, inheritance and methods according to architecture.
 
 &nbsp;
 
 ![](Mapty-architecture-part-1.png)
 
-<h3>Geolocation API to find user's location</h3>
+<h3><strong>Geolocation API</strong></h3> - to find user's location
+
+&nbsp;
 
 ```js
 ...
@@ -59,7 +60,9 @@ The user can add the workouts after selecting the workout location on the map. O
       });
 ```
 
-<h3><strong>leaflet js</strong> to show the application map and from that the user will be able to mark the training, documentation of this library <a href="https://leafletjs.com">leafletjs</a></h3>
+<h3><strong>leaflet js</strong> </h3> to show the application map and from that the user will be able to mark the training, documentation of this library <a href="https://leafletjs.com">leafletjs</a>
+
+&nbsp;
 
 ```js
 this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
@@ -70,7 +73,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 }).addTo(this.#map);
 ```
 
-<h3><strong>localStorage</strong> was also used to store the client's workouts in the browser, so even if the user reloads the page, the workouts will be saved</h3>
+<h3><strong>localStorage</strong> </h3> - was also used to store the client's workouts in the browser, so even if the user reloads the page, the workouts will be saved
+
+&nbsp;
 
 ```js
 localStorage.setItem('workouts', JSON.stringify(this.#workout));
