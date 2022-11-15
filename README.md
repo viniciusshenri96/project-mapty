@@ -90,29 +90,11 @@ localStorage.setItem('workouts', JSON.stringify(this.#workout));
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Vanilla js](http://vanilla-js.com)
+- [OOP with JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects)
 - [leaflet js](https://leafletjs.com)
 - [API geolocalization](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation)
 - [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - Flowchart was used to plan the project
-
-&nbsp;
-
-## Responsive 📱 - Mobile/Tablet/Desktop
-
-<!-- ### Mobile - 375px -->
-
-<!-- ### Tablet - 768px -->
-
-<span>
-  <img  alt="Suite landing page" title="#suite-landing-page" src="readme/mobile.jpg" width="150px">
-</span>
-<span>
-   <img alt="Suite landing page" title="#suite-landing-page" src="readme/tablet.jpg" width="150px">
-</span>
-<span>
-  <img alt="Suite landing page" title="#suite-landing-page" src="readme/desktop.jpg" width="150px">
-</span>
-<!-- ### Desktop - 1440px -->
 
 &nbsp;
 
