@@ -99,7 +99,6 @@ localStorage.setItem('workouts', JSON.stringify(this.#workout));
 - [leaflet js](https://leafletjs.com)
 - [API geolocalization](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation)
 - [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-- Flowchart was used to plan the project
 
 &nbsp;
 
